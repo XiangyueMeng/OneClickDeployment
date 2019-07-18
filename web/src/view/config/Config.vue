@@ -4,7 +4,7 @@
             <div class="app-divider"></div>
             <el-row class="app-btn-group">
                 <el-col :span="4">
-                    <el-button v-if="$root.CheckPriv($root.Priv.PROJECT_NEW)" @click="openAddDialogHandler" icon="iconfont left small icon-add" size="medium" type="primary">{{ $t('add_project') }}</el-button>&nbsp;
+                    <el-button v-if="$root.CheckPriv($root.Priv.PROJECT_NEW)" @click="openAddDialogHandler" icon="iconfont left small icon-add" size="medium" type="primary">{{ $t('add_config') }}</el-button>&nbsp;
                 </el-col>
                 <el-col :span="6" :offset="14">
                     <el-input @keyup.enter.native="searchHandler" v-model="searchInput" size="medium" :placeholder="$t('please_input_keyword')">
@@ -18,8 +18,8 @@
                 size="medium"
                 v-loading="tableLoading"
                 :data="tableData">
-                <el-table-column prop="name" :label="$t('project_name')"></el-table-column>
-                <el-table-column align="center" prop="need_audit" width="150" :label="$t('open_audit')">
+                <el-table-column prop="name" :label="$t('config_name')"></el-table-column>
+                <!-- <el-table-column align="center" prop="need_audit" width="150" :label="$t('open_audit')">
                     <template slot-scope="scope">
                         <span v-if="scope.row.need_audit == 1">{{ $t('yes') }}</span>
                         <span v-else>{{ $t('no') }}</span>
@@ -38,10 +38,10 @@
                         <span style="margin-left: 5px;" v-if="scope.row.status">{{ $t('have_enabled') }}</span>
                         <span style="margin-left: 5px;" v-else>{{ $t('not_enable') }}</span>
                     </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column :label="$t('operate')" width="380" align="right">
                     <template slot-scope="scope">
-                        <el-button
+                        <!-- <el-button
                         v-if="$root.CheckPriv($root.Priv.PROJECT_HOOK)"
                         icon="iconfont small left icon-webhook"
                         type="text"
@@ -50,7 +50,7 @@
                         v-if="$root.CheckPriv($root.Priv.PROJECT_BUILD)"
                         icon="iconfont small left icon-build"
                         type="text"
-                        @click="openBuildDialogHandler(scope.row)">{{ $t('build_setting') }}</el-button>
+                        @click="openBuildDialogHandler(scope.row)">{{ $t('build_setting') }}</el-button> -->
                         <el-button
                         v-if="$root.CheckPriv($root.Priv.PROJECT_VIEW)"
                         icon="el-icon-view"
@@ -323,7 +323,7 @@
             </div>
         </el-dialog>
 
-        <el-dialog :top="$root.DialogNormalTop" :width="$root.DialogNormalWidth" :title="$t('edit_build_script')" :visible.sync="dialogBuildVisible" @close="dialogBuildVisible = false">
+        <!-- <el-dialog :top="$root.DialogNormalTop" :width="$root.DialogNormalWidth" :title="$t('edit_build_script')" :visible.sync="dialogBuildVisible" @close="dialogBuildVisible = false">
             <div class="app-dialog" v-loading="dialogBuildLoading">
                 <div class="app-shell-editor">
                     <textarea id="editor-textarea"></textarea>
@@ -346,9 +346,9 @@
                     <el-button :loading="btnLoading" size="small" type="primary" @click="dialogSubmitBuildHandler">{{ $t('enter') }}</el-button>
                 </div>
             </div>
-        </el-dialog>
+        </el-dialog> -->
 
-        <el-dialog :top="$root.DialogNormalTop" :width="$root.DialogNormalWidth" :title="$t('edit_hook_script')" :visible.sync="dialogHookVisible" @close="dialogHookVisible = false">
+        <!-- <el-dialog :top="$root.DialogNormalTop" :width="$root.DialogNormalWidth" :title="$t('edit_hook_script')" :visible.sync="dialogHookVisible" @close="dialogHookVisible = false">
             <div class="app-dialog" v-loading="dialogHookLoading">
                 <el-form label-position="top" size="medium" label-width="130px">
                     <el-form-item :label="$t('build_hook_script')">
@@ -378,7 +378,7 @@
                     <el-button :loading="btnLoading" size="small" type="primary" @click="dialogSubmitHookHandler">{{ $t('enter') }}</el-button>
                 </div>
             </div>
-        </el-dialog>
+        </el-dialog> -->
     </div>
 </template>
 
@@ -478,75 +478,75 @@ export default {
         }
     },
     methods: {
-        openHookDialogHandler(row) {
-            this.dialogHookVisible = true
-            this.dialogHookLoading = true
-            detailProjectApi({id: row.id}).then(res => {
-                this.dialogHookForm = {
-                    id: res.id,
-                    build_hook_script: res.build_hook_script,
-                    deploy_hook_script: res.deploy_hook_script,
-                }
-                this.dialogHookLoading = false
-            })
-        },
-        dialogSubmitHookHandler() {
-            updateHookScriptApi(this.dialogHookForm).then(res => {
-                this.$root.MessageSuccess(() => {
-                    this.dialogHookVisible = false
-                })
-            })
-        },
+        // openHookDialogHandler(row) {
+        //     this.dialogHookVisible = true
+        //     this.dialogHookLoading = true
+        //     detailProjectApi({id: row.id}).then(res => {
+        //         this.dialogHookForm = {
+        //             id: res.id,
+        //             build_hook_script: res.build_hook_script,
+        //             deploy_hook_script: res.deploy_hook_script,
+        //         }
+        //         this.dialogHookLoading = false
+        //     })
+        // },
+        // dialogSubmitHookHandler() {
+        //     updateHookScriptApi(this.dialogHookForm).then(res => {
+        //         this.$root.MessageSuccess(() => {
+        //             this.dialogHookVisible = false
+        //         })
+        //     })
+        // },
 
-        dialogSubmitBuildHandler() {
-            this.dialogBuildForm.build_script = this.getBuildEditorValue()
-            updateBuildScriptApi(this.dialogBuildForm).then(res => {
-                this.$root.MessageSuccess(() => {
-                    this.dialogBuildVisible = false
-                })
-            })
-        },
-        openBuildDialogHandler(row) {
-            this.dialogBuildVisible = true
-            this.dialogBuildLoading = true
-            detailProjectApi({id: row.id}).then(res => {
-                this.dialogBuildForm = {
-                    id: res.id,
-                    build_script: res.build_script,
-                }
-                this.dialogBuildLoading = false
-                this.$nextTick(() => {
-                    this.createBuildEditor(this.dialogBuildForm.build_script)
-                })
-            })
-        },
-        createBuildEditor(content) {
-            if (!this.editorInstance) {
-                this.editorInstance = codeMirror.fromTextArea(
-                    document.getElementById('editor-textarea'),
-                    {
-                        theme: "dracula",
-                        mode: 'shell',
-                        tabSize: 4,
-                        indentUnit: 4,
-                        lineWrapping: 'wrap',
-                        lineNumbers: true,
-                        matchBrackets: true,
-                        scrollbarStyle: 'simple',
-                    }
-                )
-            }
-            if (!content) {
-                content = ''
-            }
-            this.editorInstance.setValue(content)
-        },
-        getBuildEditorValue() {
-            if (!this.editorInstance) {        
-                return ''
-            }
-            return this.editorInstance.getValue()
-        },
+        // dialogSubmitBuildHandler() {
+        //     this.dialogBuildForm.build_script = this.getBuildEditorValue()
+        //     updateBuildScriptApi(this.dialogBuildForm).then(res => {
+        //         this.$root.MessageSuccess(() => {
+        //             this.dialogBuildVisible = false
+        //         })
+        //     })
+        // },
+        // openBuildDialogHandler(row) {
+        //     this.dialogBuildVisible = true
+        //     this.dialogBuildLoading = true
+        //     detailProjectApi({id: row.id}).then(res => {
+        //         this.dialogBuildForm = {
+        //             id: res.id,
+        //             build_script: res.build_script,
+        //         }
+        //         this.dialogBuildLoading = false
+        //         this.$nextTick(() => {
+        //             this.createBuildEditor(this.dialogBuildForm.build_script)
+        //         })
+        //     })
+        // },
+        // createBuildEditor(content) {
+        //     if (!this.editorInstance) {
+        //         this.editorInstance = codeMirror.fromTextArea(
+        //             document.getElementById('editor-textarea'),
+        //             {
+        //                 theme: "dracula",
+        //                 mode: 'shell',
+        //                 tabSize: 4,
+        //                 indentUnit: 4,
+        //                 lineWrapping: 'wrap',
+        //                 lineNumbers: true,
+        //                 matchBrackets: true,
+        //                 scrollbarStyle: 'simple',
+        //             }
+        //         )
+        //     }
+        //     if (!content) {
+        //         content = ''
+        //     }
+        //     this.editorInstance.setValue(content)
+        // },
+        // getBuildEditorValue() {
+        //     if (!this.editorInstance) {        
+        //         return ''
+        //     }
+        //     return this.editorInstance.getValue()
+        // },
         openViewDialogHandler(row) {
             this.dialogViewVisible = true
             this.dialogViewLoading = true

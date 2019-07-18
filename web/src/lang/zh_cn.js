@@ -286,6 +286,8 @@ export default {
     'build_hook_script_tips': '命令会在构建完成(成功或失败)后执行，支持的变量',
     'deploy_hook_script_tips': '命令会在部署完成(成功或失败)后执行，支持的变量',
     'config':'配置',
-    'config_manage': "配置管理",
-
+    'config_manage': '配置管理',
+    'add_config': '新增配置',
+    'config_name': '配置名称',
+    
 }
