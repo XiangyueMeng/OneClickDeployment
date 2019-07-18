@@ -116,36 +116,18 @@ const routerMap = [
         name: 'config',
         component: _import('Layer'),
         meta: {
-            title: i18n.t('project'),
+            title: i18n.t('config'),
             icon: 'icon-project',
         },
         children: [
             {
-                path: 'space',
-                name: 'projectSpace',
+                path: 'config',
+                name: 'configConfig',
                 meta: {
-                    title: i18n.t('space_manage'),
-                    role: [priv.PROJECT_SPACE_VIEW],
-                },
-                component: _import('project/Space'),
-            },
-            {
-                path: 'project',
-                name: 'projectProject',
-                meta: {
-                    title: i18n.t('project_manage'),
+                    title: i18n.t('config_manage'),
                     role: [priv.PROJECT_VIEW],
                 },
-                component: _import('project/Project'),
-            },
-            {
-                path: 'user',
-                name: 'projectUser',
-                meta: {
-                    title: i18n.t('member_manage'),
-                    role: [priv.PROJECT_USER_VIEW],
-                },
-                component: _import('project/Member'),
+                component: _import('config/Config'),
             },
         ],
     },

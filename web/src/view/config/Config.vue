@@ -1,28 +1,6 @@
 <template>
     <div>
-        <el-card shadow="never" v-if="!spaceId">
-            <el-alert
-            class="app-btn-group"
-            :title="$t('prompt_message')"
-            type="info"
-            :closable="false"
-            :description="$t('project_select_space_tips')"
-            show-icon></el-alert>
-            <div class="app-btn-group">
-                <el-button type="primary" @click="switchSpaceHandler" icon="el-icon-refresh" size="small">{{ $t('select_project_space') }}</el-button>
-            </div>
-            <div class="app-divider"></div>
-        </el-card>
-        <el-card shadow="never" v-else>
-            <div class="app-btn-group">
-                <el-button type="primary" @click="switchSpaceHandler" icon="el-icon-refresh" size="small">{{ $t('switch_project_space') }}</el-button>
-            </div>
-            <div class="app-btn-group" style="min-height: 30px">
-                <div v-loading="spaceLoading">
-                    <h4>{{ this.spaceDetail.name }}</h4>
-                    <p class="app-description">{{ this.spaceDetail.description }}</p>
-                </div>
-            </div>
+        <el-card shadow="never">
             <div class="app-divider"></div>
             <el-row class="app-btn-group">
                 <el-col :span="4">
@@ -401,18 +379,6 @@
                 </div>
             </div>
         </el-dialog>
-
-        <el-dialog 
-        :width="$root.DialogSmallWidth"
-        :visible.sync="dialogSpaceVisible"
-        :title="$t('select_project_space')">
-            <div style="padding-bottom: 50px;">
-                <el-select filterable @change="selectSpaceHandler" v-model="spaceId" style="width: 100%;" size="small" :placeholder="$t('select_project_space')">
-                    <el-option v-for="s in spaceList" :key="s.id" :value="s.id" :label="$root.Substr(s.name, 50)" ></el-option>
-                </el-select>
-            </div>
-        </el-dialog>
-
     </div>
 </template>
 
