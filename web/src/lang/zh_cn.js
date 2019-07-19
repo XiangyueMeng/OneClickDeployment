@@ -289,5 +289,18 @@ export default {
     'config_manage': '配置管理',
     'add_config': '新增配置',
     'config_name': '配置名称',
+    'base_information' : '基本信息',
+    'config_id': '配置ID',
+    'config_part_1' : '第一部分配置',
+    'param_1' : '参数1',
+    'cannot_empty':'不能为空',
+    'param_2': '参数2',
+    'option_1':'选项1',
+    'option_2':'选项2',
+    'param_3':'参数3',
+    'option_3':'选项3',
+    'please_select':'请选择',
+    'upload_file' : '上传文件',
+    'view_config_info':'查看配置信息',
     
 }
